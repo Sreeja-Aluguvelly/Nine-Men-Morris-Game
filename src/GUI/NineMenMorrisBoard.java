@@ -1,108 +1,98 @@
 
 package GUI;
 
-// import java.awt.*;
-// import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NineMenMorrisBoard {
-  private int[][] boardState; // Represents the state of the game board
-  private int currentPlayer; // 1 for player 1 (black), 2 for player 2 (white)
-  private int blackPieces; // Number of remaining black pieces
-  private int whitePieces; // Number of remaining white pieces
+  private int[][] boardState;
+  private int currentPlayer;
+  private int blackPieces;
+  private int whitePieces;
+  private int[][] highlightedIntersections;
+
+
 
   public NineMenMorrisBoard() {
-    // Initialize the game board
-    boardState = new int[7][7]; // 7x7 grid for the Nine Men's Morris board
-    currentPlayer = 1; // Start with player 1 (black)
-    blackPieces = 9; // Each player starts with 9 pieces
+    boardState = new int[7][7];
+    currentPlayer = 1;
+    blackPieces = 9;
     whitePieces = 9;
+
   }
 
 
+
+  // placePiece function takes the selected position and
+  // places the corresponding piece in the given location
+  // return true if successful and false if not
   public boolean placePiece(int row, int col) {
     if (isValidMove(row, col)) {
       getBoardState()[row][col] = getCurrentPlayer();
 
-      // Decrease the count of remaining pieces for the current player
       if (getCurrentPlayer() == 1) {
-        setBlackPieces(getBlackPieces() - 1);
-        // player1PiecesLabel.setText("No. of pieces left"+board.getBlackPieces());
+        setWhitePieces(getWhitePieces() - 1);
 
       } else {
-        setWhitePieces(getWhitePieces() - 1);
-        // player2PiecesLabel.setText("No. of pieces left"+board.getWhitePieces());
+        setBlackPieces(getBlackPieces() - 1);
 
       }
-      // Toggle players
-      setCurrentPlayer((getCurrentPlayer() == 1) ? 2 : 1);
 
       return true;
     }
     return false;
   }
 
+
   public boolean isValidMove(int row, int col) {
-    // Implement your logic to check if the move is valid
-    // You need to consider the game rules for Nine Men's Morris here
-    // Return true if the move is valid, otherwise return false
-    // You also need to check if a player has won the game
 
     if (isValidIntersecction(row, col) && (boardState[row][col] == 0)
         && (blackPieces > 0 || whitePieces > 0)) {
-      // Implement other game rules here
-
-      return true; // Valid move
+      return true;
     }
     return false;
   }
 
 
   public boolean isValidIntersecction(int row, int col) {
-    // Implement your logic to check if the move is valid
-    // You need to consider the game rules for Nine Men's Morris here
-    // Return true if the move is valid, otherwise return false
-    // You also need to check if a player has won the game
-
     if ((isCorner(row, col) || isEdge(row, col) || isCenter(row, col))) {
-      // Implement other game rules here
 
-      return true; // Valid move
+      return true;
     }
     return false;
   }
 
 
 
-  // Getter method for current player
   public int getCurrentPlayer() {
     return currentPlayer;
   }
 
+  public void changePlayerTurn() {
+    setCurrentPlayer((getCurrentPlayer() == 1) ? 2 : 1);
+
+  
+  }
   public void setCurrentPlayer(int player) {
     currentPlayer = player;
   }
 
-  // Getter method for game state (board state)
   public int[][] getBoardState() {
     return boardState;
   }
 
-  // Getter method for remaining black pieces
   public int getBlackPieces() {
     return blackPieces;
   }
 
-  // Setter method for remaining black pieces
   public void setBlackPieces(int blackPieces) {
     this.blackPieces = blackPieces;
   }
 
-  // Getter method for remaining white pieces
   public int getWhitePieces() {
     return whitePieces;
   }
 
-  // Setter method for remaining white pieces
   public void setWhitePieces(int whitePieces) {
     this.whitePieces = whitePieces;
   }
@@ -110,36 +100,260 @@ public class NineMenMorrisBoard {
 
 
   public boolean isCorner(int row, int col) {
-    // Check if the intersection is a corner based on the number of rows and columns
-    // Corners are at the first and last row and column
-    // return( (row == 0 && col == 0) || (row == 0 && col == 7 - 1) || (row == 7 - 1 && col == 0) ||
-    // (row == 7 - 1 && col == 7 - 1));
     return (row == 0 && col == 0) || (row == 0 && col == 6) || (row == 6 && col == 0)
         || (row == 6 && col == 6);
 
   }
 
   public boolean isEdge(int row, int col) {
-    // Check if the intersection is an edge based on the number of rows and columns
-    // Edges are not corners and are at the first and last row or column
-
-    return (row == 1 && col == 1) || (row == 1 && col == 3) || (row == 1 && col == 5)
-        || (row == 3 && col == 6) || (row == 5 && col == 5) || (row == 5 && col == 3)
-        || (row == 5 && col == 1) || (row == 3 && col == 0) || (row == 2 && col == 2)
-        || (row == 2 && col == 4) || (row == 4 && col == 2) || (row == 4 && col == 4);
+    return (row == 1 && col == 1) || (row == 1 && col == 5) || (row == 5 && col == 5)
+        || (row == 5 && col == 1) || (row == 2 && col == 2) || (row == 2 && col == 4)
+        || (row == 4 && col == 2) || (row == 4 && col == 4);
 
   }
 
   public boolean isCenter(int row, int col) {
-    // Check if the intersection is the center based on the number of rows and columns
-    // Center intersection is at the middle row and middle column
-    // return ((row == 7 / 2) && (col == 7 / 2));
     if ((row == 3 && col == 3)) {
       return false;
     }
 
     return row == 3 || col == 3;
   }
+  
+  
+  
 
-  // Other game logic methods can be added here
+  
+  public void setHighlightedIntersections(int[][] intersections) {
+    this.highlightedIntersections = intersections;
+}
+  
+  
+  
+  public int[][] getHighlightedIntersections() {
+    return this.highlightedIntersections;
+}
+  
+  
+ public boolean gameover(int[][] boardstate, int currentplayer) {
+   
+   
+   int opponent = (currentPlayer == 1) ? 2 : 1;
+
+   if (hasFewerThanThreePieces(boardState, opponent)) {
+       return true; 
+   }
+
+   if (!hasLegalMoves(boardState, currentPlayer)) {
+       return true; 
+   }
+
+   return false; 
+ }
+ 
+ public boolean hasFewerThanThreePieces(int[][] boardState, int player) {
+   int count = 0;
+   for (int row = 0; row < boardState.length; row++) {
+       for (int col = 0; col < boardState[row].length; col++) {
+           if (boardState[row][col] == player) {
+               count++;
+           }
+       }
+   }
+   return count < 3;
+}
+ 
+ 
+ 
+ public boolean hasLegalMoves(int[][] boardState, int player) {
+   for (int row = 0; row < boardState.length; row++) {
+       for (int col = 0; col < boardState[row].length; col++) {
+           if (boardState[row][col] == player) {
+               // Check if this piece can be moved to an adjacent empty spot.
+               // You'll need to implement this logic based on the rules.
+               // This will depend on the current game phase (Placing, Moving, Flying).
+               // You should check if a move is legal for the given player and their piece's position.
+               // If a legal move is found, return true.
+           }
+       }
+   }
+   return false;
+}
+ 
+ 
+ 
+ public void removePiece(int[][] boardState, int row, int col) {
+   if (boardState[row][col] != 0 && boardState[row][col] != currentPlayer) {
+       boardState[row][col] = 0;
+   }
+}
+ public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol) {
+// if (isValidMove(fromRow, fromCol) && isValidMove(toRow, toCol)) {
+       int[][] boardState = getBoardState();
+       int currentPlayer = getCurrentPlayer();
+       if (currentPlayer == 2 && getBlackPieces() == 0) {
+//         if (Math.abs(fromRow - toRow) + Math.abs(fromCol - toCol) == 1) {
+               boardState[toRow][toCol] = 2;
+               boardState[fromRow][fromCol] = 0;
+               return true;
+//         }
+       } else if (currentPlayer == 1 && getWhitePieces() == 0) {
+//         if (Math.abs(fromRow - toRow) + Math.abs(fromCol - toCol) == 1) {
+               boardState[toRow][toCol] = 1;
+               boardState[fromRow][fromCol] = 0;
+               return true;
+//         }
+       }
+       return false;
+ }
+
+ 
+ public boolean millformed(int[][] board, int row,int col, int player) {
+   
+   
+   if(hasHorizontalMill(board,row,player)) {
+     return true;
+     
+   }
+   
+  if(hasVerticalMill(board,col,player)) {
+    return true;
+     
+   }
+   
+   
+   
+   return false;
+}
+  
+
+   public  boolean hasHorizontalMill(int[][] board, int row, int player) {
+       if (row % 2 == 0) {
+           // Check horizontal mills in valid locations (even rows).
+           return (board[row][0] == player && board[row][3] == player && board[row][6] == player)
+               || (board[row][2] == player && board[row][3] == player && board[row][4] == player);
+       } else {
+           // Check horizontal mills in valid locations (odd rows).
+           return (board[row][0] == player && board[row][1] == player && board[row][2] == player)
+               || (board[row][4] == player && board[row][5] == player && board[row][6] == player)
+               || (board[row][1] == player && board[row][3] == player && board[row][5] == player);
+       }
+   }
+
+   public  boolean hasVerticalMill(int[][] board, int col, int player) {
+       if (col % 2 == 0) {
+           // Check vertical mills in valid locations (even columns).
+
+           return (board[0][col] == player && board[3][col] == player && board[6][col] == player)
+              
+               || (board[2][col] == player && board[3][col] == player && board[4][col] == player);
+       } else {
+           // Check vertical mills in valid locations (odd columns).
+           return (board[0][col] == player && board[1][col] == player && board[2][col] == player)
+               
+               || (board[6][col] == player && board[4][col] == player && board[5][col] == player)
+               ||  (board[1][col] == player && board[3][col] == player && board[5][col] == player);
+       }
+   }
+
+   
+   
+   
+   public int[][] getplayerpieces(int[][] boardState, int player){
+     
+     
+     
+     List<int[]> playerPieces = new ArrayList<>();
+
+     for (int row = 0; row < 7; row++) {
+         for (int col = 0; col < 7; col++) {
+             if (boardState[row][col] == player) {
+                 playerPieces.add(new int[]{row, col});
+             }
+         }
+     }
+
+     return playerPieces.toArray(new int[0][0]);
+
+
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+  
+  
+}
+   
+   
+   public int[][] findAdjacentValidIntersections(int x, int y) {
+     ArrayList<int[]> adjacentIntersections = new ArrayList<>();
+     int[][] possibleNeighbors = {
+             {x - 2, y}, {x + 2, y}, {x, y - 2}, {x, y + 2}
+         };
+         // Handle specific cases where the piece is at a corner
+         if ((x == 0 && y == 0) || (x == 6 && y == 0) || (x == 0 && y == 6) || (x == 6 && y == 6)) {
+             possibleNeighbors = new int[][] {
+                 {x + 3, y}, {x, y + 3}, {x - 3, y}, {x, y - 3}
+             };
+         }
+         else if((x == 3 && y == 6) || (x == 3 && y == 0))
+         {
+           possibleNeighbors = new int[][] {
+                 {x, y - 1}, {x + 3, y}, {x - 3, y}, {x, y + 1}
+             };
+         }
+         else if(x == 0 && y == 3 || x == 6 && y == 3)
+         {
+           possibleNeighbors = new int[][] {
+                 {x , y + 3}, {x, y - 3}, {x + 1, y}, {x - 1, y}
+             };
+         }
+         // Handle the specific case where the piece is at (1,3)
+         else if ((x == 1 && y == 3) ||(x == 5 && y == 3 )) {
+             possibleNeighbors = new int[][] {
+                 {x + 1, y},{x - 1, y},{x, y - 2},{x, y + 2}
+             };
+           }
+          else if ((x == 3 && y == 1) ||(x == 3 && y == 5 )) {
+             possibleNeighbors = new int[][] {
+                 {x , y + 1},{x, y - 1},{x - 2, y},{x + 2, y}
+             };   
+         }
+          else if ((x == 2 && y == 3) || (x == 3 && y == 4) || (x == 3 && y == 2) || (x == 4 && y == 3)) {
+             possibleNeighbors = new int[][] {
+                 {x - 1, y},{x , y + 1},{x, y - 1},{x + 1, y}
+             };   
+         }
+         else if((x == 2 && y == 2) || (x == 2 && y == 4) || (x == 4 && y == 2) || (x == 4 && y == 4))
+         {
+         possibleNeighbors = new int[][]{
+             {x - 1, y}, {x + 1, y}, {x, y - 1}, {x, y + 1}
+         };
+       }
+
+         for (int[] neighbor : possibleNeighbors) {
+             int nx = neighbor[0];
+             int ny = neighbor[1];
+             if(nx >=0 && nx < 7 && ny >=0 && ny < 7 )
+             {
+             if (isValidIntersecction(nx, ny) && boardState[nx][ny] == 0) {
+                 adjacentIntersections.add(new int[]{nx,ny});
+             }
+           }
+         }
+       return adjacentIntersections.toArray(new int[0][0]);
+     }
+   
+   
+   
+   
+   
+   
+   
 }

@@ -13,7 +13,7 @@ public class PiecePlacementTests extends TestCase {
     board = new NineMenMorrisBoard(); // I
 
   }
-
+// test for , successful piece placement 
   public void testSuccesfulPiecePlacement() {
     boolean status = board.placePiece(0, 0);
     assertTrue(status);
@@ -27,6 +27,7 @@ public class PiecePlacementTests extends TestCase {
 
   }
 
+  //test for, if player selects occupied intersection then piece is not placed.
   public void testOccupiedIntersection() {
     boolean status = board.placePiece(0, 0);
     status = board.placePiece(0, 0);
@@ -38,7 +39,7 @@ public class PiecePlacementTests extends TestCase {
 
   }
 
-
+  //test for, if player selects invalid location then piece is not placed.
   public void testInvalidlocationOutsideBoard() {
     boolean status = board.placePiece(0, 7);
     assertFalse(status);
@@ -46,7 +47,8 @@ public class PiecePlacementTests extends TestCase {
 
 
   }
-
+  
+  //test for, if player selects invalids intersection then piece is not placed
   public void testInvalidIntersection() {
     boolean status = board.placePiece(0, 1);
     int boardstate[][] = board.getBoardState();
@@ -54,10 +56,10 @@ public class PiecePlacementTests extends TestCase {
     assertEquals(0, boardstate[0][0]);
     assertEquals(1, board.getCurrentPlayer());
 
+
+
+
   }
-
-
-
 }
 
 

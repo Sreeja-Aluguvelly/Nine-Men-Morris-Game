@@ -10,17 +10,15 @@ public class EmptyBoardTests extends TestCase {
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard(); // I
+    board = new NineMenMorrisBoard();
 
   }
 
   public void testSuccesfulBoardCreation() {
 
     int boardstate[][] = board.getBoardState();
-    System.out.print(board.getCurrentPlayer());
     for (int row = 0; row < 7; row++) {
       for (int column = 0; column < 7; column++) {
-        System.out.print(boardstate[row][column]);
         assertEquals(0, boardstate[row][column]);
       }
     }
@@ -29,16 +27,31 @@ public class EmptyBoardTests extends TestCase {
 
   }
 
-  // public void testInvalidIndexing() {
-  //
-  // int boardstate[][]=board.getBoardState();
-  // System.out.print(board.getCurrentPlayer());
+  public void testInvalidRowIndexing() {
 
-  // assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-  // int value = boardstate[7][7];
-  // });
-  //
-  // }
+    try {
+      int boardstate[][] = board.getBoardState();
+      int value = boardstate[8][2];
+      System.out.println(value);
+    } catch (Exception e) {
+      return;
+    }
+    fail("Expected Exception, but no exception was thrown.");
+
+  }
+
+  public void testInvalidColumnIndexing() {
+
+    try {
+      int boardstate[][] = board.getBoardState();
+      int value = boardstate[5][9];
+      System.out.println(value);
+    } catch (Exception e) {
+      return;
+    }
+    fail("Expected Exception, but no exception was thrown.");
+
+  }
 
 
 
