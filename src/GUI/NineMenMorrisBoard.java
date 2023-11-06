@@ -182,15 +182,18 @@ public class NineMenMorrisBoard {
  
  
  
- public void removePiece(int[][] boardState, int row, int col) {
+ public boolean removePiece(int[][] boardState, int row, int col) {
    if (boardState[row][col] != 0 && boardState[row][col] != currentPlayer) {
        boardState[row][col] = 0;
+       return true;
    }
+   return false;
 }
  public boolean movePiece(int fromRow, int fromCol, int toRow, int toCol) {
 // if (isValidMove(fromRow, fromCol) && isValidMove(toRow, toCol)) {
        int[][] boardState = getBoardState();
        int currentPlayer = getCurrentPlayer();
+       System.out.println("player tuen is "+currentPlayer);
        if (currentPlayer == 2 && getBlackPieces() == 0) {
 //         if (Math.abs(fromRow - toRow) + Math.abs(fromCol - toCol) == 1) {
                boardState[toRow][toCol] = 2;
