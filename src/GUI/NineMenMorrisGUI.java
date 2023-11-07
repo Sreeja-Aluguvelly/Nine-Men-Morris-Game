@@ -496,7 +496,23 @@ public class NineMenMorrisGUI extends JPanel {
           
          if(millformed) {
          System.out.println("mill formed");
+         
+         int[][] high = board.getplayerpieces(board.getBoardState(), board.getCurrentPlayer()==1?2:1);
 
+             
+             System.out.println("high[l][m]");
+
+             for(int l =0; l<high.length;l++) {
+               
+               for(int m=0 ; m<high[l].length;m++) {
+                 System.out.println(high[l][m]);
+                 
+                 
+                 
+               }
+               
+               
+             }
            board.setHighlightedIntersections(board.getplayerpieces(board.getBoardState(), board.getCurrentPlayer()==1?2:1));
            removepiece =true;
           }

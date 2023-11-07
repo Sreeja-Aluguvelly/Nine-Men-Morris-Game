@@ -166,19 +166,30 @@ public class NineMenMorrisBoard {
  
  
  public boolean hasLegalMoves(int[][] boardState, int player) {
-   for (int row = 0; row < boardState.length; row++) {
-       for (int col = 0; col < boardState[row].length; col++) {
-           if (boardState[row][col] == player) {
-               // Check if this piece can be moved to an adjacent empty spot.
-               // You'll need to implement this logic based on the rules.
-               // This will depend on the current game phase (Placing, Moving, Flying).
-               // You should check if a move is legal for the given player and their piece's position.
-               // If a legal move is found, return true.
-           }
-       }
-   }
-   return false;
-}
+   int[][] intersections=new int[0][0];
+   boolean value=false;
+   System.out.println(intersections);
+    for (int row = 0; row < boardState.length; row++) {
+        for (int col = 0; col < boardState[row].length; col++) {
+            if (boardState[row][col] == player) {
+             intersections=findAdjacentValidIntersections(row, col);
+             if(intersections.length!=0)
+             {
+             //System.out.println("Intersections has legal moves");
+             value=true;
+             break;
+             }
+             
+                // Check if this piece can be moved to an adjacent empty spot.
+                // You'll need to implement this logic based on the rules.
+                // This will depend on the current game phase (Placing, Moving, Flying).
+                // You should check if a move is legal for the given player and their piece's position.
+                // If a legal move is found, return true.
+            }
+        }
+    }
+    return value;
+ }
  
  
  
@@ -214,12 +225,12 @@ public class NineMenMorrisBoard {
  public boolean millformed(int[][] board, int row,int col, int player) {
    
    
-   if(hasHorizontalMill(board,row,player)) {
+   if(hasHorizontalMill(board,row,col,player)) {
      return true;
      
    }
    
-  if(hasVerticalMill(board,col,player)) {
+  if(hasVerticalMill(board,row,col,player)) {
     return true;
      
    }
@@ -230,44 +241,57 @@ public class NineMenMorrisBoard {
 }
   
 
-   public  boolean hasHorizontalMill(int[][] board, int row, int player) {
-       if (row % 2 == 0) {
-           // Check horizontal mills in valid locations (even rows).
-           return (board[row][0] == player && board[row][3] == player && board[row][6] == player)
-               || (board[row][2] == player && board[row][3] == player && board[row][4] == player);
-       } else {
-           // Check horizontal mills in valid locations (odd rows).
-           return (board[row][0] == player && board[row][1] == player && board[row][2] == player)
-               || (board[row][4] == player && board[row][5] == player && board[row][6] == player)
-               || (board[row][1] == player && board[row][3] == player && board[row][5] == player);
-       }
+ public  boolean hasHorizontalMill(int[][] board, int row, int col, int player) {
+   if (row % 2 == 0) {
+       // Check horizontal mills in valid locations (even rows).
+       //System.out.println("Entered");
+       return (board[row][0] == player && board[row][3] == player && board[row][6] == player)
+           || (board[row][2] == player && board[row][3] == player && board[row][4] == player);
+   } 
+   else if(row==3 && (col == 0 ||col == 1 || col == 2))
+   {
+    return (board[row][0] == player && board[row][1] == player && board[row][2] == player);
    }
-
-   public  boolean hasVerticalMill(int[][] board, int col, int player) {
-       if (col % 2 == 0) {
-           // Check vertical mills in valid locations (even columns).
-
-           return (board[0][col] == player && board[3][col] == player && board[6][col] == player)
-              
-               || (board[2][col] == player && board[3][col] == player && board[4][col] == player);
-       } else {
-           // Check vertical mills in valid locations (odd columns).
-           return (board[0][col] == player && board[1][col] == player && board[2][col] == player)
-               
-               || (board[6][col] == player && board[4][col] == player && board[5][col] == player)
-               ||  (board[1][col] == player && board[3][col] == player && board[5][col] == player);
-       }
+   else if(row==3 && (col == 4 ||col == 5 || col == 6))
+   {
+    return (board[row][4] == player && board[row][5] == player && board[row][6] == player);
    }
+   else {
+       // Check horizontal mills in valid locations (odd rows).
+       return (board[row][1] == player && board[row][3] == player && board[row][5] == player);
+   }
+}
+
+ public  boolean hasVerticalMill(int[][] board, int row, int col, int player) {
+   if (col % 2 == 0) {
+       // Check vertical mills in valid locations (even columns).
+
+       return (board[0][col] == player && board[3][col] == player && board[6][col] == player)
+          
+           || (board[2][col] == player && board[3][col] == player && board[4][col] == player);
+   }
+   else if(col==3 && (row == 0 ||row == 1 || row == 2))
+   {
+    return (board[0][col] == player && board[1][col] == player && board[2][col] == player);
+   }
+   else if(col==3 && (row == 4 ||row == 5 || row == 6))
+   {
+    return(board[6][col] == player && board[4][col] == player && board[5][col] == player);
+   }
+   else {
+       // Check vertical mills in valid locations (odd columns).
+       return (board[1][col] == player && board[3][col] == player && board[5][col] == player);
+}
+}
 
    
    
-   
-   public int[][] getplayerpieces(int[][] boardState, int player){
+public int[][] getplayerpieces(int[][] boardState, int player){
      
      
      
      List<int[]> playerPieces = new ArrayList<>();
-
+    List<int[]> playerPieces1 = new ArrayList<>();
      for (int row = 0; row < 7; row++) {
          for (int col = 0; col < 7; col++) {
              if (boardState[row][col] == player) {
@@ -276,21 +300,22 @@ public class NineMenMorrisBoard {
          }
      }
 
-     return playerPieces.toArray(new int[0][0]);
+     for (int[] intersection : playerPieces) {
+            System.out.println("(" + intersection[0] + ", " + intersection[1] + ")");
+            if(!(millformed(getBoardState(),intersection[0] ,intersection[1], player)))
+            {
+              System.out.println("((" + intersection[0] + ", " + intersection[1] + "))");
+              playerPieces1.add(new int[]{intersection[0], intersection[1]});
+            }
+
+        }
+        if(playerPieces1.isEmpty())
+        {
+          playerPieces1.addAll(playerPieces);
+        }
 
 
-  
-  
-  
-  
-  
-  
-  
-   
-  
-  
-  
-  
+     return playerPieces1.toArray(new int[0][0]);
 }
    
    
