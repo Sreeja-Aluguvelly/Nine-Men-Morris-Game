@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import GUI.NineMenMorrisBoard;
@@ -320,6 +321,19 @@ public class NineMenMorrisGUI extends JPanel {
           if(succ) {
           removepiece=false;
           boardPanel.repaint();
+          
+          
+          
+          if (board.gameover(board.getBoardState(), board.getCurrentPlayer())) {
+            System.out.println("Game over");
+            
+            JOptionPane.showMessageDialog(null, "Player " + board.getCurrentPlayer() + " wins!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+
+            resetBoard();
+            
+            //JOptionPane.showMessageDialog(null, "Game is over", "Game Over", JOptionPane.INFORMATION_MESSAGE);            // Add your game-over handling logic here.
+            // You can display a message, declare a winner, or take any other appropriate action.
+        }
           board.changePlayerTurn();
           }
           
@@ -521,6 +535,20 @@ public class NineMenMorrisGUI extends JPanel {
          
          else {
            
+           
+           
+           if (board.gameover(board.getBoardState(), board.getCurrentPlayer())) {
+             System.out.println("Game over");
+             
+             
+             JOptionPane.showMessageDialog(null, "Player " + board.getCurrentPlayer() + " wins!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+
+             resetBoard();
+           //  JOptionPane.showMessageDialog(null, "Game is over", "Game Over", JOptionPane.INFORMATION_MESSAGE);            // Add your game-over handling logic here.
+             // Add your game-over handling logic here.
+             // You can display a message, declare a winner, or take any other appropriate action.
+         }
+           
            board.changePlayerTurn();
            
          }
@@ -585,6 +613,21 @@ public class NineMenMorrisGUI extends JPanel {
     }
     return null;
 }
+  
+  public void resetBoard()
+  {
+    System.out.println("Inside reset board");
+
+    SwingUtilities.invokeLater(() -> {
+      JFrame frame = new JFrame("Nine Men's Morris");
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setSize(1000, 700);
+      frame.add(new NineMenMorrisGUI());
+      frame.setVisible(true);
+    });
+  
+  }
+  
 }
 
 

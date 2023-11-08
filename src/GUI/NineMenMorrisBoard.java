@@ -139,14 +139,31 @@ public class NineMenMorrisBoard {
    
    
    int opponent = (currentPlayer == 1) ? 2 : 1;
-
+   System.out.println("Priting less than 3 pieces func");
+  System.out.println(hasFewerThanThreePieces(boardState, opponent));
+  
+  
+  
+  System.out.println("Priting has legal moves func");
+ System.out.println(hasLegalMoves(boardState, opponent));
+ 
+ 
+ 
+ 
+ if(!(getWhitePieces()  >0 && getBlackPieces() >0)) {
+   
+   
    if (hasFewerThanThreePieces(boardState, opponent)) {
-       return true; 
-   }
+     return true; 
+ }
 
-   if (!hasLegalMoves(boardState, currentPlayer)) {
-       return true; 
-   }
+ if (!hasLegalMoves(boardState, opponent)) {
+     return true; 
+ }
+
+   
+ }
+  
 
    return false; 
  }
@@ -377,6 +394,9 @@ public int[][] getplayerpieces(int[][] boardState, int player){
          }
        return adjacentIntersections.toArray(new int[0][0]);
      }
+   
+   
+   
    
    
    
