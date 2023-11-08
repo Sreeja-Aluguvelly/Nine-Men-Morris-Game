@@ -119,6 +119,18 @@ public class NineMenMorrisGUI extends JPanel {
      player2TurnLabel.setFont(newFont);
      gbc1.gridy=4;
      rightPanel.add(player2TurnLabel,gbc1);
+     JLabel player2MillFormed = new JLabel("Mill is formed");
+     //player1MillFormed.setForeground(Color.RED);
+     gbc.gridy=5;
+     rightPanel.add(player2MillFormed,gbc);
+     player2MillFormed.setVisible(false);
+     //Font newFont4 = new Font(player1MillFormed.getFont().getName(), Font.BOLD, 16);
+     player2MillFormed.setFont(newFont4);
+     JLabel player2ToRemovePiece = new JLabel("Remove opponent piece");
+     gbc.gridy=6;
+     rightPanel.add(player2ToRemovePiece,gbc);
+     player2ToRemovePiece.setVisible(false);
+     player2ToRemovePiece.setFont(newFont4);
 
     // Board Panel
     JPanel boardPanel = new JPanel() {  
@@ -321,7 +333,10 @@ public class NineMenMorrisGUI extends JPanel {
           if(succ) {
           removepiece=false;
           boardPanel.repaint();
-          
+          player1MillFormed.setVisible(false);
+          player1ToRemovePiece.setVisible(false);
+          player2MillFormed.setVisible(false);
+          player2ToRemovePiece.setVisible(false);
           
           
           if (board.gameover(board.getBoardState(), board.getCurrentPlayer())) {
@@ -529,6 +544,16 @@ public class NineMenMorrisGUI extends JPanel {
              }
            board.setHighlightedIntersections(board.getplayerpieces(board.getBoardState(), board.getCurrentPlayer()==1?2:1));
            removepiece =true;
+           if(board.getCurrentPlayer()==1)
+           {
+           player1MillFormed.setVisible(true);
+            player1ToRemovePiece.setVisible(true);
+           }
+           else
+           {
+            player2MillFormed.setVisible(true);
+            player2ToRemovePiece.setVisible(true);
+           }
           }
          
          
