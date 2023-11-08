@@ -42,11 +42,11 @@ public class NineMenMorrisGUI extends JPanel {
 
     // Player 1 information
     gbc.insets = new Insets(10, 10, 10, 10);
-    ImageIcon imageIcon =loadImageIcon("src/images/black.png");
+    ImageIcon imageIcon =loadImageIcon("src/images/white.png");
     JLabel label = new JLabel(imageIcon);
     leftPanel.add(label,gbc);
     // Placeholder label for player 1 information
-    JLabel player1Label = new JLabel("Player 1 (Black)");
+    JLabel player1Label = new JLabel("Player 1 (White)");
     gbc.gridy = 1;
     gbc.anchor = GridBagConstraints.SOUTH; 
     leftPanel.add(player1Label,gbc);
@@ -97,7 +97,7 @@ public class NineMenMorrisGUI extends JPanel {
     JLabel label1 = new JLabel(imageIcon1);
     rightPanel.add(label1,gbc1);
      // Placeholder label for player 2 information
-     JLabel player2Label = new JLabel("Player 2 (White)");
+     JLabel player2Label = new JLabel("Player 2 (Black)");
      gbc1.gridy = 1;
      gbc1.anchor=GridBagConstraints.SOUTH;
      //GridBagConstraints gbc1 = new GridBagConstraints();
