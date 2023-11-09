@@ -222,6 +222,10 @@ public class NineMenMorrisBoard {
        int[][] boardState = getBoardState();
        int currentPlayer = getCurrentPlayer();
        System.out.println("player tuen is "+currentPlayer);
+       
+       
+       
+       if(boardState[toRow][toCol] ==0) {
        if (currentPlayer == 2 && getBlackPieces() == 0) {
 //         if (Math.abs(fromRow - toRow) + Math.abs(fromCol - toCol) == 1) {
                boardState[toRow][toCol] = 2;
@@ -234,6 +238,7 @@ public class NineMenMorrisBoard {
                boardState[fromRow][fromCol] = 0;
                return true;
 //         }
+       }
        }
        return false;
  }
@@ -336,8 +341,21 @@ public int[][] getplayerpieces(int[][] boardState, int player){
 }
    
    
-   public int[][] findAdjacentValidIntersections(int x, int y) {
-     ArrayList<int[]> adjacentIntersections = new ArrayList<>();
+  public int[][] findAdjacentValidIntersections(int x, int y) {
+  int count=countPlayerPieces();
+   ArrayList<int[]> adjacentIntersections = new ArrayList<>();
+   if(count==3)
+   {
+      for (int row = 0; row < 7; row++) {
+       for (int col = 0; col < 7; col++) {
+           if (boardState[row][col] == 0 && isValidIntersecction(row, col)) {
+               adjacentIntersections.add(new int[]{row, col});
+           }
+       }
+   }
+   }
+   else
+   {
      int[][] possibleNeighbors = {
              {x - 2, y}, {x + 2, y}, {x, y - 2}, {x, y + 2}
          };
@@ -392,8 +410,23 @@ public int[][] getplayerpieces(int[][] boardState, int player){
              }
            }
          }
+   }
        return adjacentIntersections.toArray(new int[0][0]);
      }
+  
+  public int countPlayerPieces()
+  {
+   int count=0;
+   for (int row = 0; row < 7; row++) {
+      for (int col = 0; col < 7; col++) {
+          if (boardState[row][col] ==getCurrentPlayer()) {
+              count=count+1;
+          }
+      }
+  }
+  return count;
+
+  }
    
    
    
