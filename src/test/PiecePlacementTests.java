@@ -21,6 +21,7 @@ public class PiecePlacementTests extends TestCase {
       int boardstate[][] = board.getBoardState();
       assertEquals(1, boardstate[0][0]);
       assertEquals(2, board.getCurrentPlayer());
+      
 
     }
 

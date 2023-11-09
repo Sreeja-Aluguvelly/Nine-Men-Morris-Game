@@ -25,6 +25,7 @@ public class NoOfPiecesLeftTests extends TestCase {
     if (status) {
       assertEquals(initialBlackPieces - 1, board.getBlackPieces());
     }
+    
   }
 
 
