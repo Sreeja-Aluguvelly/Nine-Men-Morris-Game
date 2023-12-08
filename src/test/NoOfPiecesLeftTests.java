@@ -17,6 +17,7 @@ public class NoOfPiecesLeftTests extends TestCase {
   public void testSuccessfulUpdateOfNoOfPieces() {
     int initialWhitePieces = board.getWhitePieces();
     boolean status = board.placePiece(0, 0);
+    board.changePlayerTurn();
     if (status) {
       assertEquals(initialWhitePieces - 1, board.getWhitePieces());
     }
@@ -32,6 +33,7 @@ public class NoOfPiecesLeftTests extends TestCase {
   public void testUnscuccesfulUpdateOfNoOfPieces() {
     int initialWhitePieces = board.getWhitePieces();
     boolean status = board.placePiece(0, 0);
+    board.changePlayerTurn();
     if (status) {
       assertFalse(initialWhitePieces - 1 != board.getWhitePieces());
     }

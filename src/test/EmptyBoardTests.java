@@ -21,6 +21,7 @@ public class EmptyBoardTests extends TestCase {
       for (int column = 0; column < 7; column++) {
         assertEquals(0, boardstate[row][column]);
         
+        
       }
     }
     assertEquals(1, board.getCurrentPlayer());
