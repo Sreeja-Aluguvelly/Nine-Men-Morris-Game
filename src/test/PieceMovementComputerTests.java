@@ -3,12 +3,12 @@ package test;
 import junit.framework.TestCase;
 import GUI.NineMenMorrisBoard;
 
-public class PieceMovementTests extends TestCase {
+public class PieceMovementComputerTests extends TestCase {
   private NineMenMorrisBoard board;
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard("Human vs Human",9,9);
+    board = new NineMenMorrisBoard("Human vs Computer",9,9);
     for(int row=0;row<7;row++) {
       
       for(int col=0;col<7;col++) {

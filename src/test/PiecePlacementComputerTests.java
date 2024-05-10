@@ -2,17 +2,21 @@ package test;
 
 import junit.framework.TestCase;
 import GUI.NineMenMorrisBoard;
+import GUI.NineMenMorrisGUI;
 
-public class PiecePlacementTests extends TestCase {
+public class PiecePlacementComputerTests extends TestCase {
   private NineMenMorrisBoard board;
+  private NineMenMorrisGUI GUI;
+
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard("Human vs Human",9,9);
+    board = new NineMenMorrisBoard("Human vs Computer",9,9);
   }
   
   public void testSuccesfulPiecePlacement() {
     boolean status = board.placePiece(0, 0);
     board.changePlayerTurn();
+    
     assertTrue(status);
     if (status) {
       int boardstate[][] = board.getBoardState();

@@ -3,12 +3,12 @@ package test;
 import junit.framework.TestCase;
 import GUI.NineMenMorrisBoard;
 
-public class MillFormationTests extends TestCase {
+public class MillFormationComputerTests extends TestCase {
   private NineMenMorrisBoard board;
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard("Human vs Human",9,9);
+    board = new NineMenMorrisBoard("Human vs Computer",9,9);
     boolean status = board.placePiece(0, 0);
     board.changePlayerTurn();
     

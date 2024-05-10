@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 public class NineMenMorrisBoard {
   private int[][] boardState;
@@ -13,7 +12,7 @@ public class NineMenMorrisBoard {
   private int blackPieces;
   private int whitePieces;
   private int[][] highlightedIntersections;
- static private List<MoveRecord> recordedMoves;
+ public static List<MoveRecord> recordedMoves;
  static private List<MoveRecord> recordedPrevMoves= new ArrayList<>();;
   public enum MoveType {
     PLACING, MOVING, FLYING, REMOVING
@@ -485,7 +484,7 @@ public class NineMenMorrisBoard {
 
          
          if (success) {
-           var millformed =
+           boolean millformed =
                millformed(getBoardState(), move.getDestRow(), move.getDestCol(), getCurrentPlayer());
 
            if (millformed) {
@@ -585,7 +584,7 @@ public class NineMenMorrisBoard {
          
          
          if (!success2) {
-           var millformed =
+           boolean millformed =
                millformed(getBoardState(), move.getDestRow(), move.getDestCol(), getCurrentPlayer());
 
            if (millformed) {

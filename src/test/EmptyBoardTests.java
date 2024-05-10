@@ -10,8 +10,9 @@ public class EmptyBoardTests extends TestCase {
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard();
 
+    board = new NineMenMorrisBoard("Human vs Human",9,9);
+ 
   }
 
   public void testSuccesfulBoardCreation() {

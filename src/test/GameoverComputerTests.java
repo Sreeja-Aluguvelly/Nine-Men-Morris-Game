@@ -5,12 +5,12 @@ import GUI.NineMenMorrisBoard;
 
 
 
-public class GameoverTests extends TestCase {
+public class GameoverComputerTests extends TestCase {
   private NineMenMorrisBoard board;
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard("Human vs Human",9,9);
+    board = new NineMenMorrisBoard("Human vs Computer",9,9);
     
 
   

@@ -5,12 +5,12 @@ import GUI.NineMenMorrisBoard;
 
 
 
-public class NoOfPiecesLeftTests extends TestCase {
+public class NoOfPiecesLeftComputerTests extends TestCase {
   private NineMenMorrisBoard board;
 
   protected void setUp() throws Exception {
     super.setUp();
-    board = new NineMenMorrisBoard("Human vs Human",9,9);
+    board = new NineMenMorrisBoard("Human vs Computer",9,9);
 
   }
 

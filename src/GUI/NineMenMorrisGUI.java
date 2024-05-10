@@ -27,7 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import GUI.NineMenMorrisBoard;
 import GUI.NineMenMorrisBoard.MoveRecord;
 
 public class NineMenMorrisGUI extends JPanel {
@@ -827,16 +826,6 @@ public class NineMenMorrisGUI extends JPanel {
         // Define the action to be taken when Button 1 is clicked
         //System.out.println("Button 1 clicked!");
     }
-
-    private static void button2Clicked() {
-        // Define the action to be taken when Button 2 is clicked
-       // System.out.println("Button 2 clicked!");
-    }
-
-    private static void button3Clicked() {
-        // Define the action to be taken when Button 3 is clicked
-        //System.out.println("Button 3 clicked!");
-    }
     
   public void removepiecefromGUI(JPanel boardPanel,int row,int col)
   {
@@ -1010,7 +999,62 @@ public class NineMenMorrisGUI extends JPanel {
            col = randomToMoveIntersection[1];
           
           System.out.println("in moving else  row: "+row+"  col:  "+ col);
+          
 
+          
+//          if(board.getWhitePieces()<3) {
+//            List<int[]> playerPieces = new ArrayList<>();
+//
+//            
+//            
+//            for (int i = 0; row < 7; row++) {
+//              for (int j = 0; col < 7; col++) {
+//                if (board.getBoardState()[i][j] == 1) {
+//                  playerPieces.add(new int[] {i, j});
+//                }
+//              }
+//            }
+//            int array[][]= playerPieces.toArray(new int[0][0]);
+//
+//            
+//            
+//            
+//            for(int i=0;i<3;i++) {
+//              if(board.isValidMove(array[i][0],array[i][0]))
+//              {
+//                System.out.println("is valid move");
+//                board.getBoardState()[array[i][0]][array[i][1]]=1;
+//                if(board.millformed(board.getBoardState(),array[i][0],array[i][1],1))
+//                {
+//                  System.out.println("is valid move");
+//
+//                  board.getBoardState()[array[i][0]][array[i][1]]=0;
+//                  row=array[i][0];
+//                  col=array[i][1];
+//                }
+//                board.getBoardState()[row][col]=0;
+//
+//
+//              }
+//              
+//              
+//              
+//              
+//            }
+//            
+//            
+//            
+//          }
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
  
           boolean contains = false;
           for (int i = 0; i < intersections.length; i++) {
@@ -1037,7 +1081,7 @@ public class NineMenMorrisGUI extends JPanel {
     System.out.println("Printing success states");
 
     if (successstatus) {
-      var millformed =
+      boolean millformed =
           board.millformed(board.getBoardState(), row, col, board.getCurrentPlayer());
 
       if (millformed) {
